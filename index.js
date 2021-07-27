@@ -67,9 +67,7 @@ app.get('/test-firebase', async function (req, res) {
     res.send('Test firebase successfully, check your firestore for a new record !!!')
 })
 
-app.listen(process.env.PORT || port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+
 // Respond to POST request on the root route (/), the application’s home page:
 app.post('/', function (req, res) {
     res.send('Got a POST request')
@@ -110,6 +108,8 @@ app.get('/vaccine/fetch', async (req, res) => {
     }
 
 });
-
+app.listen(process.env.PORT || port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
 
 
