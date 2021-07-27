@@ -1,0 +1,15 @@
+{
+    "name": "pongsakon/myexpress",
+    "autoload": {
+        "psr-4": {
+            "Pongsakon\\Myexpress\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "khing",
+            "email": "86485230+khing02@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
