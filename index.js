@@ -25,6 +25,8 @@ const firebaseConfig = {
 }
 const admin = firebase.initializeApp(firebaseConfig);
 const db = admin.firestore();
+//Fetch or AXOIS
+const fetch = require('node-fetch');
 const app = express();
 const port = 3000
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -33,8 +35,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
         .all(req.body.events.map(handleEvent))
         .then((result) => res.json(result));
 });
-//Fetch or AXOIS
-const fetch = require('node-fetch');
+
 async function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
         return Promise.resolve(null);
@@ -46,10 +47,38 @@ async function handleEvent(event) {
     //console.log(event);
     //console.log(event.message);
     //console.log(event.message.text);
-    return client.replyMessage(event.replyToken, {
-        type: 'text',
-        text: event.message.text,
-    });
+    //return client.replyMessage(event.replyToken, {
+     //   type: 'text',
+     //   text: event.message.text,
+   // });
+   switch (event.message.text) {
+    case "covid":
+        //let newText = "สวัสดี เราเป็นบอทรายงานสถิติโควิดนะ";
+        let data = await getTodayCovid();
+        let newText = JSON.stringify(data);
+
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: newText,
+        });
+        break;
+    default:
+        //console.log(event);
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: event.message.text,
+        });
+}
+}
+async function getTodayCovid() {
+    let current_date = (new Date()).toISOString().split("T")[0];
+    let doc = await db.collection('vaccines').doc(current_date).get();
+    // if (!doc.exists) {
+    //     console.log('No such document!');
+    // } else {
+    //     console.log('Document data:', doc.data());
+    // }
+    return doc.data();
 }
 
 
@@ -89,25 +118,13 @@ app.get('/vaccine/fetch', async (req, res) => {
      let current_date = (new Date()).toISOString().split("T")[0];
      await db.collection('vaccines').doc(current_date).set(data); 
     //SEND TO BROWSER AS HTML OR TEXT
-    let text = JSON.stringify(data);
+    //let text = JSON.stringify(data);
     res.send(text)
-    switch (event.message.text) {
-        case "covid":
-            let newText = "สวัสดี เราเป็นบอทรายงานสถิติโควิดนะ";
-            return client.replyMessage(event.replyToken, {
-                type: 'text',
-                text: newText,
-            });
-            break;
-        default:
-            //console.log(event);
-            return client.replyMessage(event.replyToken, {
-                type: 'text',
-                text: event.message.text,
-            });
-    }
+    
 
 });
+
+
 app.listen(process.env.PORT || port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
