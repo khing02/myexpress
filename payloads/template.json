@@ -1,0 +1,113 @@
+{
+    "type": "flex",
+    "altText": "This is a Flex Message",
+    "contents":{
+        "type": "bubble",
+        "direction": "ltr",
+        "hero": {
+          "type": "image",
+          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+          "size": "full",
+          "aspectRatio": "20:13",
+          "aspectMode": "cover",
+          "action": {
+            "type": "uri",
+            "label": "Line",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "ขอมูลการฉีดวัคซีน",
+              "weight": "bold",
+              "size": "xl",
+              "contents": []
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "margin": "md",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "ฉีดวัคซีน 1 เข็ม :${vaccince.oneDose.total} (${vaccince.oneDose.percent}%)",
+                  "size": "md",
+                  "color": "#171313FF",
+                  "align": "center",
+                  "margin": "md",
+                  "contents": []
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "margin": "lg",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "ฉีดวัคซีน 2 เข็ม : ${vaccince.twoDose.total} (${vaccince.twoDose.percent}%)",
+                      "size": "md",
+                      "color": "#1A1818FF",
+                      "flex": 5,
+                      "align": "center",
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "รวมทั้งหมด : ${vaccince.all.total} (${vaccince.all.percent}%)",
+                      "size": "md",
+                      "color": "#2A2525FF",
+                      "flex": 5,
+                      "align": "center",
+                      "wrap": true,
+                      "contents": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "flex": 0,
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "WEBSITE",
+                "uri": "https://linecorp.com"
+              },
+              "height": "sm",
+              "style": "link"
+            },
+            {
+              "type": "spacer",
+              "size": "sm"
+            }
+          ]
+        }
+      }
+}
